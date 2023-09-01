@@ -1,0 +1,25 @@
+.joke {
+  text-align: center;
+  font-size: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+button {
+  font-size: 3rem;
+  background-color: #ffbf00;
+  padding: 2rem;
+  border-radius: 50px;
+  border: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.octopus {
+  width: 70%;
+  position: fixed;
+  bottom: 0px;
+}
