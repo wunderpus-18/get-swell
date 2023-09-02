@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack NODE_ENV=production & nodemon server/server.js --mode production",
-    "start": "concurrently \"NODE_ENV=development webpack-dev-server --open\" \"nodemon server/server.js\""
+    "build": "webpack NODE_ENV=production",
+    "start": "nodemon server/server.js",
+    "dev": "concurrently \"NODE_ENV=development webpack-dev-server --open\" \"nodemon server/server.js\""
   },
   "keywords": [],
-  "author": "Bryan Choe, Gayle Martin, Ivy Shmikley, Meredith Frazier Britt, Moiz Rauf",
+  "author": "Bryan Choe, Gayle Martin, Ivy Shmikler, Meredith Frazier Britt, Moiz Rauf",
   "license": "ISC",
   "dependencies": {
     "@emotion/react": "^11.11.1",
