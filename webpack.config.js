@@ -3,12 +3,12 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 // OPTION - add variable for process.env.NODE_ENV
 
 module.exports = {
-  // OPTION - add mode: process.env.NODE_ENV
   entry: './client/index.js',
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, '/dist'),
   },
+  mode: process.env.NODE_ENV,
   devServer: {
     // OPTION - add static directory where files can be served from
     // static: {}
@@ -17,10 +17,9 @@ module.exports = {
     open: true,
     proxy: {
       // localhost:8080/ will point to localhost:3000
-      '/': {
-        target: 'http://localhost:8080',
-        router: () => 'http://localhost:3000',
-        logLevel: 'debug',
+      '/api': {
+        target: 'http://localhost:3000',
+        secure: false,
       },
     },
   },

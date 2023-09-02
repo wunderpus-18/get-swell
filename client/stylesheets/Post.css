@@ -1,0 +1,17 @@
+.post {
+  /* background-color: #ffffff; */
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.post img {
+  max-width: 100%;
+  height: auto;
+}
+
+.post p {
+  margin: 8px 0;
+}

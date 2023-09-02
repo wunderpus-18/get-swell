@@ -1,0 +1,13 @@
+.feed-container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+
+.feed {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
