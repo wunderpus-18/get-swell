@@ -5,7 +5,7 @@ import DrawerAppBar from './components/Menu.jsx';
 const App = () => {
   return (
     <div id='app'>
-      {/* <DrawerAppBar /> */}
+      <DrawerAppBar />
       <MainContainer />
     </div>
   );
