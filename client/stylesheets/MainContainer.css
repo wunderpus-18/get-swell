@@ -1,0 +1,7 @@
+#mainContainer {
+  /* limits width when smaller than 1280 to 90% of screen*/
+  max-width: min(90%, 1280px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
