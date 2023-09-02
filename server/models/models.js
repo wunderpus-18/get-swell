@@ -21,8 +21,10 @@ const userSchema = new Schema({
   userName: { type: String, required: true },
   password: { type: String, required: true },
   email: { type: String, required: true },
-  // default preferences
-  preferences: Object,
+  preferences: {
+    type: Array,
+    default: ['Motivation', 'Milestone', 'Mindfulness'],
+  },
   profilePic: Buffer,
   zipCode: { type: String },
 });
@@ -31,26 +33,30 @@ const activitySchema = new Schema(
   {
     userName: { type: Schema.Types.ObjectId, ref: 'user', required: true },
     // preference instead of category
-    category: String,
+    preference: { type: String, required: true },
     // image is stretch
     image: Buffer,
-    description: String,
-    hypes: Number, // Likes
+    description: { type: String, required: true },
+    hypes: { type: Number, default: 0 }, // Likes
     vibes: Array, // Comments
   },
   { timestamps: true },
 );
 
-// commentSchema
-// user
-// text
-// timestamp
-//
+const commentSchema = new Schema(
+  {
+    userName: { type: Schema.Types.ObjectId, ref: 'user', required: true },
+    comment: { type: String, required: true },
+  },
+  { timestamps: true },
+);
 
-const user = mongoose.model('user', userSchema);
-const activity = mongoose.model('activity', activitySchema);
+const User = mongoose.model('User', userSchema);
+const Activity = mongoose.model('Activity', activitySchema);
+const Comment = mongoose.model('Comment', commentSchema);
 
 module.exports = {
-  userSchema,
-  activitySchema,
+  User,
+  Activity,
+  Comment,
 };
