@@ -1,28 +1,27 @@
 const express = require('express');
 const path = require('path');
-
 const app = express();
 const PORT = 3000;
 
 // REQUIRED ROUTERS
-// ADD HERE
+const apiRouter = require('./routes/api.js');
+app.use('/api', apiRouter);
 
+// PARSE JSON
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// is this correct way to serve dist folder for static files?
+// SERVE STATIC FILES
 app.use(express.static(path.join(__dirname, './../dist')));
 
-// MAIN PATH INTO SERVER '/'
-// ADD ROUTES HERE
-
-// serve index.html from bundled dist folder
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './../dist/index.html'));
-});
+// // serve index.html from bundled dist folder
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, './../dist/index.html'));
+// });
 
 // serve 404 status
 // TODO: Add 404 html page
-app.use((req, res) => res.sendStatus(404));
+app.use((req, res) => res.status(404).send('Ope! Looks like you took a wrong turn!'));
 
 // global error handler
 app.use((err, req, res, next) => {
@@ -34,8 +33,14 @@ app.use((err, req, res, next) => {
 
   const errorObj = Object.assign({}, defaultErr, err);
   console.log(errorObj.log);
-
   return res.status(errorObj.status).json(errorObj.message);
 });
+
+// Environments
+if (process.env.NODE_ENV === 'production') {
+  // statically serve everything in the build folder on the route '/build'
+  app.use('/build', express.static(path.join(__dirname, '../build')));
+}
+console.log('NODE_ENV: ', process.env.NODE_ENV);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
