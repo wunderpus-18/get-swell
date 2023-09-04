@@ -27,18 +27,18 @@ userController.createUser = async (req, res, next) => {
   const { userName } = req.query;
   console.log('entered createUser with user:', userName);
   console.log('req.body:', req.body);
-  //   const { password, email, preferences, profilePic, zipCode } = req.body;
+  const { password, email, preferences, zipCode } = req.body;
   try {
-    // const newUser = await User.create({
-    //   userName,
-    //   password,
-    //   email,
-    //   preferences,
-    //   profilePic,
-    //   zipCode,
-    // });
-    // res.locals.newUser = newUser;
-    // console.log(newUser);
+    console.log(userName, password);
+    const newUser = await User.create({
+      userName,
+      password,
+      email,
+      preferences,
+      zipCode,
+    });
+    res.locals.newUser = newUser;
+    console.log(newUser);
     return next();
   } catch (error) {
     return next({
@@ -51,8 +51,14 @@ userController.createUser = async (req, res, next) => {
 userController.updateUser = async (req, res, next) => {
   const { userName } = req.query;
   console.log('entered updateUser with user:', userName);
-  console.log(req);
+  console.log(req.body);
   try {
+    const filter = { userName };
+    const update = req.body;
+    const updatedUser = await User.findOneAndUpdate(filter, update, {
+      new: true,
+    });
+    res.locals.updatedUser = updatedUser;
     return next();
   } catch (error) {
     return next({

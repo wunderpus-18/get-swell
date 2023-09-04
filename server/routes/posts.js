@@ -2,9 +2,15 @@ const express = require('express');
 const router = express.Router();
 const postController = require('./../controllers/postController.js');
 
+// TEST ROUTE TO GET ALL POSTS
+router.get('/', postController.getAllPosts, (req, res) => {
+  res.status(200).json(res.locals.allPosts);
+});
+
 // GET ALL POSTS BY PREFERENCE
-// fetch will include array of preferences (from menu)
-router.get('/', postController.getFilteredPosts, (req, res) => {
+// ADD USER ID as parameter
+// fetch will include object of preference properties with each value true or false
+router.get('/:id', postController.getFilteredPosts, (req, res) => {
   res.status(200).json(res.locals.filteredPosts);
 });
 
