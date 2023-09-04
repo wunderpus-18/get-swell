@@ -62,9 +62,10 @@ userController.updateUser = async (req, res, next) => {
 };
 
 userController.deleteUser = async (req, res, next) => {
-  
+  const { userName } = req.query;
   try {
-    // const deletedUser =
+    const deletedUser = findOneAndDelete({ userName });
+    res.locals.deletedUser = deletedUser;
     return next();
   } catch (error) {
     return next({
