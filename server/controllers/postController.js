@@ -2,8 +2,25 @@ const { Activity } = require('../models/models.js');
 
 const postController = {};
 
+// TEST ROUTE FOR ALL POSTS
+postController.getAllPosts = async (req, res, next) => {
+  console.log('entered getAllPosts');
+  try {
+    const allPosts = await Activity.find({});
+    res.locals.allPosts = allPosts;
+    return next();
+  } catch (error) {
+    return next({
+      log: `postController.getAllPosts: ERROR ${err}`,
+      status: 400,
+      message: { err: 'An error occurred' },
+    });
+  }
+};
+
 // GET ALL POSTS filtered by preference
 postController.getFilteredPosts = async (_, res, next) => {
+  console.log('entered getFilteredPosts');
   try {
     const postData = await Activity.Post.find({
       preference: {
@@ -51,9 +68,13 @@ postController.updatePost = async (req, res, next) => {
   const update = { preference, image, description };
 
   try {
-    const updatedPostData = await Activity.Post.findOneAndUpdate(filter, update, {
-      returnNewDocument: true,
-    });
+    const updatedPostData = await Activity.Post.findOneAndUpdate(
+      filter,
+      update,
+      {
+        returnNewDocument: true,
+      },
+    );
     res.locals.updatedPost = updatedPostData;
     return next();
   } catch (err) {
