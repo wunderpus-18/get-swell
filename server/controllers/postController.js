@@ -6,7 +6,7 @@ const postController = {};
 postController.getAllPosts = async (req, res, next) => {
   console.log('entered getAllPosts');
   try {
-    const allPosts = await Activity.find({});
+    const allPosts = await Activity.find({}).populate('userID');
     res.locals.allPosts = allPosts;
     return next();
   } catch (error) {
