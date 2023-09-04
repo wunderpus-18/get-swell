@@ -1,5 +1,7 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
+
 const app = express();
 const PORT = 3000;
 
@@ -7,6 +9,9 @@ const PORT = 3000;
 const apiRouter = require('./routes/api.js');
 const userRouter = require('./routes/users.js');
 const postRouter = require('./routes/posts.js');
+
+// Use cors
+app.use(cors());
 
 // PARSE JSON
 app.use(express.urlencoded({ extended: true }));

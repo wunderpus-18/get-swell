@@ -7,11 +7,8 @@ userController.getUser = async (req, res, next) => {
   const { userName } = req.query;
   try {
     const fetchedUser = await User.findOne({ userName });
-    console.log(
-      'userController.getUser successfully fetched user:',
-      fetchedUser,
-    );
     res.locals.user = fetchedUser;
+    console.log('userController.getUser fetched user:', fetchedUser);
     return next();
   } catch (error) {
     return next({
@@ -22,11 +19,8 @@ userController.getUser = async (req, res, next) => {
 };
 
 // POST - add new user
-// TO DO - figure out why request body is not coming through
 userController.createUser = async (req, res, next) => {
   const { userName } = req.query;
-  console.log('entered createUser with user:', userName);
-  console.log('req.body:', req.body);
   const { password, email, preferences, zipCode } = req.body;
   try {
     console.log(userName, password);
@@ -38,7 +32,7 @@ userController.createUser = async (req, res, next) => {
       zipCode,
     });
     res.locals.newUser = newUser;
-    console.log(newUser);
+    console.log('userController.createUser created:', newUser);
     return next();
   } catch (error) {
     return next({
@@ -50,8 +44,6 @@ userController.createUser = async (req, res, next) => {
 
 userController.updateUser = async (req, res, next) => {
   const { userName } = req.query;
-  console.log('entered updateUser with user:', userName);
-  console.log(req.body);
   try {
     const filter = { userName };
     const update = req.body;
@@ -59,6 +51,7 @@ userController.updateUser = async (req, res, next) => {
       new: true,
     });
     res.locals.updatedUser = updatedUser;
+    console.log('userController.updateUser updated:', updatedUser);
     return next();
   } catch (error) {
     return next({
@@ -68,15 +61,17 @@ userController.updateUser = async (req, res, next) => {
   }
 };
 
-// userController.deleteUser = async (req, res, next) => {
-//   try {
-//     return next();
-//   } catch (error) {
-//     return next({
-//       log: `userController.deleteUser caught error: ${error}`,
-//       message: { err: 'See server log for details' },
-//     });
-//   }
-// };
+userController.deleteUser = async (req, res, next) => {
+  
+  try {
+    // const deletedUser =
+    return next();
+  } catch (error) {
+    return next({
+      log: `userController.deleteUser caught error: ${error}`,
+      message: { err: 'See server log for details' },
+    });
+  }
+};
 
 module.exports = userController;
