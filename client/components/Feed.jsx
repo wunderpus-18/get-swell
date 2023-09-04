@@ -8,9 +8,10 @@ import '../stylesheets/Feed.css'
 const url = 'http://localhost:3000/api/posts'
 function fetchPosts (testUrl){
     fetch(url)
-        .then( data => data.json )
+        .then( data => data.json() )
         .then( response => {
-            console.log(response);
+            console.log('now console logging response from server:', response);
+            console.log(typeof (response[0].userID));
         })
 };
 fetchPosts(url);
