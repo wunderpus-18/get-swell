@@ -22,8 +22,12 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   email: { type: String, required: true },
   preferences: {
-    type: Array,
-    default: ['Motivation', 'Milestone', 'Mindfulness'],
+    type: Object,
+    default: {
+      motivation: true,
+      milestones: true,
+      mindfulness: true,
+    },
   },
   profilePic: Buffer,
   zipCode: { type: String },
