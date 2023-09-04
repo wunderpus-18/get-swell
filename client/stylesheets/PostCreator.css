@@ -1,0 +1,28 @@
+.postCreator {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.post-input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.post-button {
+    background-color: #647ead;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.post-button:hover {
+    background-color: #82a2df;
+}

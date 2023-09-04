@@ -1,18 +1,51 @@
 import React, { useState, useEffect } from 'react';
-// import './../stylesheets/Post.css';
-// import octopus from '../assets/octopus-tentacles.png';
+import './../stylesheets/PostCreator.css';
+import octopus from '../assets/octopus-tentacles.png';
+import DropdownMenu from './Dropdown.jsx';
 
-const Post = (props) => {
+
+const PostCreator = (props) => {
+
+const [createPost, setCreatePost] = useState('');
+
+const handlePost = async () => {
+  const results = await setCreatePost(createPost);
+  setCreatePost(results || '')
+}
+
+const containerStyles = {
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+}
+
+const inputStyles = {
+  width: '100%',
+  marginBottom: '10px'
+}
+
 
   return (
-    <div className='postCreator'>
-        
-      <img src={octopus}></img>
-      <p><b>Category: </b> {props.postInfo.category}</p>
-      <p><b>{props.postInfo.userName}</b> {props.postInfo.description}</p>
-      <p><b># Hypes: </b>{props.postInfo.hypes}</p>
-    </div>
+      <div style={containerStyles} className='postCreator'>
+        <div className="input-and-dropdown">
+       <DropdownMenu/>
+       <form>
+       <input 
+          type="text"
+          value={createPost}
+          onChange={(event) => setCreatePost(event.target.value)}
+          style={inputStyles}
+          className="post-input"
+       />
+       </form>
+       </div>
+       <button onClick={handlePost}>Post</button>
+     </div>
+
+  
   );
 };
 
-export default Post;
+export default PostCreator;
+
+
