@@ -19,10 +19,11 @@ postController.getAllPosts = async (req, res, next) => {
 };
 
 // GET ALL POSTS filtered by preference
+// TODO: This doesn't work right now. At the moment we are handling the filtering on the front-end.
 postController.getFilteredPosts = async (_, res, next) => {
   console.log('entered getFilteredPosts');
   try {
-    const postData = await Activity.Post.find({
+    const postData = await Activity.find({
       preference: {
         $in: user.preferences,
       },
@@ -38,28 +39,31 @@ postController.getFilteredPosts = async (_, res, next) => {
   }
 };
 
-// CREATE NEW POST
+// CREATE NEW POST - Done
 postController.createPost = async (req, res, next) => {
-  const { userName, preference, image, description } = req.body;
+  const { userID, preference, image, description, hypes, vibes } = req.body;
   try {
-    const postData = await Activity.Post.create({
-      userName,
+    const postData = await Activity.create({
+      userID,
       preference,
       image,
       description,
+      hypes,
+      vibes,
     });
     res.locals.newPost = postData;
+    console.log('res.locals.newPost: ', res.locals.newPost);
     return next();
   } catch (err) {
     return next({
-      log: `postController.getfilteredPosts: ERROR ${error}`,
+      log: `postController.createPost: ERROR ${error}`,
       status: 400,
       message: { err: 'An error occurred' },
     });
   }
 };
 
-// UPDATE POST
+// UPDATE POST - Done
 postController.updatePost = async (req, res, next) => {
   const { id } = req.params;
   //TODO: We might need a separate update controller for comments
@@ -68,13 +72,9 @@ postController.updatePost = async (req, res, next) => {
   const update = { preference, image, description };
 
   try {
-    const updatedPostData = await Activity.Post.findOneAndUpdate(
-      filter,
-      update,
-      {
-        returnNewDocument: true,
-      },
-    );
+    const updatedPostData = await Activity.findOneAndUpdate(filter, update, {
+      returnNewDocument: true,
+    });
     res.locals.updatedPost = updatedPostData;
     return next();
   } catch (err) {
@@ -86,12 +86,12 @@ postController.updatePost = async (req, res, next) => {
   }
 };
 
-// DELETE POST
+// DELETE POST - Done
 postController.deletePost = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const deletedPostData = await Activity.Post.findOneAndDelete({ _id: id });
+    const deletedPostData = await Activity.findOneAndDelete({ _id: id });
     res.locals.deletedPost = deletedPostData;
     return next();
   } catch (err) {
