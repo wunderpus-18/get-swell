@@ -3,6 +3,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 
 const MONGO_URI = dotenv.config().parsed.DB_URI;
+console.log('MONGO_URI: ', MONGO_URI);
 
 mongoose
   .connect(MONGO_URI, {
