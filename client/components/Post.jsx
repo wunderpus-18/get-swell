@@ -17,12 +17,13 @@ const Post = (props) => {
 
   // props.postInfo.userName , category, description, hypes
   // 
+  // const imgToDisplay = props.postInfo.image.data;
 
   return (
     <div className='post'>
       <img src={octopus}></img>
-      <p><b>Category: </b> {props.postInfo.category}</p>
-      <p><b>{props.postInfo.userName}:</b> {props.postInfo.description}</p>
+      <p><b>Category: </b> {props.postInfo.preference}</p>
+      <p><b>{props.postInfo.userID.userName}:</b> {props.postInfo.description}</p>
       <p><b>Hypes: </b>{props.postInfo.hypes}</p>
     </div>
   );

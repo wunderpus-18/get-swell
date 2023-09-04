@@ -25,10 +25,17 @@ const navItems = ['Motivation', 'Milestones', 'Mindfulness'];
 function DrawerAppBar(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user } = props;
 //   const { prefs, setPrefs } = props;
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  console.log('HERE ARE THE PREFS THAT ABSOLUTELY SHOULD BE LOADING:', props.prefs);
+  navItems.map((item, index) => {
+    console.log(`${item}: ${props.prefs[item]}`);
+
+  })
 
 
 //   const handlePrefToggle = () = {
@@ -36,13 +43,9 @@ function DrawerAppBar(props) {
 //   }
 
   const handlePrefsChange = (event, prefs=props.prefs, setPrefs=props.setPrefs) => {
-    
-
     const isChecked = event.target.checked;
     const preference = navItems[event.target.id]; // .toLowerCase();
-
     // access the event to get either motiviation, milestone, or mindfulness
-    
     const newPrefs =
     // make target equal either "motivation", "milestone", or "mindfulness"
     {
@@ -51,8 +54,6 @@ function DrawerAppBar(props) {
       Mindfulness: prefs.Mindfulness
     }
     newPrefs[preference] = isChecked;
-
-    
     setPrefs(newPrefs);
   }
 
@@ -66,11 +67,13 @@ function DrawerAppBar(props) {
       </Typography>
       <Divider />
       <List>
+        <h3>{user.userName}</h3>
+        
         {navItems.map((item, index) => (
-          <ListItem key={item} disablePadding>
+          <ListItem className="prefs" key={item} disablePadding>
             <FormControlLabel
               control={
-                <Switch className="switch" id={`${index}`} sx={{ textAlign: 'center' }} onChange={(e) => handlePrefsChange(e)} />
+                <Switch checked={props.prefs[item]} className="switch" id={`${index}`} sx={{ textAlign: 'center', marginLeft: '40px' }} onChange={(e) => handlePrefsChange(e)} />
               }
               label={item}
             />
