@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
-// import './../stylesheets/Post.css';
-// import octopus from '../assets/octopus-tentacles.png';
+import './../stylesheets/PostCreator.css';
+import octopus from '../assets/octopus-tentacles.png';
 
 const PostCreator = (props) => {
 
+const [createPost, setCreatePost] = useState('');
 
 
 const handlePost = async () => {
-
+  //const results = await postCreater(createPost);
+  //setCreatePost(results.something || '')
+  //setCreatePost('')
 }
 
 
@@ -17,8 +20,14 @@ const handlePost = async () => {
       <div className='postCreator'>
 
        <input 
-        type="text"
+          type="text"
+          value={createPost}
+          onChange={(event) => setCreatePost(event.target.value)}
+          className="post-input"
        />
+       <button onClick={handlePost}>Post</button>
+
+
 
      </div>
      </>
@@ -27,4 +36,4 @@ const handlePost = async () => {
   );
 };
 
-export default Post;
+export default PostCreator;

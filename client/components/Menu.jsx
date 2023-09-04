@@ -36,20 +36,22 @@ function DrawerAppBar(props) {
 //   }
 
   const handlePrefsChange = (event, prefs=props.prefs, setPrefs=props.setPrefs) => {
+    
 
     const isChecked = event.target.checked;
-    const preference = navItems[event.target.id].toLowerCase();
+    const preference = navItems[event.target.id]; // .toLowerCase();
 
     // access the event to get either motiviation, milestone, or mindfulness
     
     const newPrefs =
     // make target equal either "motivation", "milestone", or "mindfulness"
     {
-      motivation: prefs.motivation,
-      milestones: prefs.milestones,
-      mindfulness: prefs.mindfulness
+      Motivation: prefs.Motivation,
+      Milestones: prefs.Milestones,
+      Mindfulness: prefs.Mindfulness
     }
     newPrefs[preference] = isChecked;
+
     
     setPrefs(newPrefs);
   }

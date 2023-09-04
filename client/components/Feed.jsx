@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Post from './Post.jsx';
 //const path = require('path');
 import '../stylesheets/Feed.css'
+//import PostCreator from './PostCreator.jsx';
 
 
 // const url = 'http://http://localhost:3000/api/users?userName=mfrazb'
@@ -19,8 +20,8 @@ function makeFakePostsArr (numPosts) {
     const fakePostsArr = [];
     
     const usernames = ['Meredith', 'Gayle', 'Ivy', 'Bryan', 'Moiz'];
-    const preferences = ['motivation', 'milestones', 'mindfulness'];
-    const descriptions = { motivation: 'Get motivated guys!', milestones: 'I just ran 50 lightyears', mindfulness: 'Be grateful guys! (And drink water)'};
+    const preferences = ['Motivation', 'Milestones', 'Mindfulness'];
+    const descriptions = { Motivation: 'Get motivated guys!', Milestones: 'I just ran 50 lightyears', Mindfulness: 'Be grateful guys! (And drink water)'};
     
     
     for (let i=0; i<numPosts; i++){
@@ -62,12 +63,14 @@ const Feed = (props) => {
     const [ feedData, setFeedData] = useState([])
     
     useEffect(() => {
+        
         const allPostsArr = makeFakePostsArr(40);
 
         // only filter those posts that match props.prefs
 
         const filteredPostsArr = allPostsArr.filter ( (el) => props.prefs[el.category] );
         // const filteredPostsArr = allPostsArr;
+
 
 
         setFeedData(filteredPostsArr);
@@ -80,6 +83,8 @@ const Feed = (props) => {
 
     for (let i = 0; i < feedData.length; i++) {
         feedArray.push(<Post key={i} postInfo={feedData[i]}/>)
+        console.log(`<Post key=${i} postInfo=${feedData[i]}/>)`);
+        console.log(feedData[i]);
     }
 
     return(

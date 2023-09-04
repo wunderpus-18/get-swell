@@ -3,6 +3,7 @@ import './../stylesheets/Post.css';
 import octopus from '../assets/octopus-tentacles.png';
 
 const Post = (props) => {
+  console.log('creating a post');
   // STATE HOOKS
   //HANDLERS
 
