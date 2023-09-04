@@ -8,10 +8,6 @@ const apiRouter = require('./routes/api.js');
 const userRouter = require('./routes/users.js');
 const postRouter = require('./routes/posts.js');
 
-app.use('/api', apiRouter);
-app.use('/api/users', userRouter);
-app.use('/api/posts', postRouter);
-
 // PARSE JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -24,9 +20,15 @@ app.use(express.static(path.join(__dirname, './../dist')));
 //   res.sendFile(path.join(__dirname, './../dist/index.html'));
 // });
 
+app.use('/api', apiRouter);
+app.use('/api/users', userRouter);
+app.use('/api/posts', postRouter);
+
 // serve 404 status
 // TODO: Add 404 html page
-app.use((req, res) => res.status(404).send('Ope! Looks like you took a wrong turn!'));
+app.use((req, res) =>
+  res.status(404).send('Ope! Looks like you took a wrong turn!'),
+);
 
 // global error handler
 app.use((err, req, res, next) => {
