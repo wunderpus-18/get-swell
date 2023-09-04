@@ -5,15 +5,15 @@ import '../stylesheets/Feed.css'
 //import PostCreator from './PostCreator.jsx';
 
 
-// const url = 'http://http://localhost:3000/api/users?userName=mfrazb'
-// function fetchPosts (testUrl){
-//     fetch(url)
-//         .then( data => data.json )
-//         .then( response => {
-//             console.log(response);
-//         })
-// };
-// fetchPosts(url);
+const url = 'http://localhost:3000/api/posts'
+function fetchPosts (testUrl){
+    fetch(url)
+        .then( data => data.json )
+        .then( response => {
+            console.log(response);
+        })
+};
+fetchPosts(url);
 
 function makeFakePostsArr (numPosts) {
     
