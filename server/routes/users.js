@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+
 const userController = require('./../controllers/userController.js');
 
 // GET - logged-in user from database
