@@ -33,9 +33,11 @@ const userSchema = new Schema({
   zipCode: { type: String },
 });
 
+const User = mongoose.model('User', userSchema);
+
 const activitySchema = new Schema(
   {
-    userName: { type: Schema.Types.ObjectId, ref: 'user', required: true },
+    userID: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     // preference instead of category
     preference: { type: String, required: true },
     // image is stretch
@@ -47,16 +49,16 @@ const activitySchema = new Schema(
   { timestamps: true },
 );
 
+const Activity = mongoose.model('Activity', activitySchema);
+
 const commentSchema = new Schema(
   {
-    userName: { type: Schema.Types.ObjectId, ref: 'user', required: true },
+    userName: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     comment: { type: String, required: true },
   },
   { timestamps: true },
 );
 
-const User = mongoose.model('User', userSchema);
-const Activity = mongoose.model('Activity', activitySchema);
 const Comment = mongoose.model('Comment', commentSchema);
 
 module.exports = {

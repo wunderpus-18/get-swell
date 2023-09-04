@@ -11,7 +11,7 @@ postController.getAllPosts = async (req, res, next) => {
     return next();
   } catch (error) {
     return next({
-      log: `postController.getAllPosts: ERROR ${err}`,
+      log: `postController.getAllPosts: ERROR ${error}`,
       status: 400,
       message: { err: 'An error occurred' },
     });
@@ -31,7 +31,7 @@ postController.getFilteredPosts = async (_, res, next) => {
     return next();
   } catch (err) {
     return next({
-      log: `postController.getfilteredPosts: ERROR ${err}`,
+      log: `postController.getfilteredPosts: ERROR ${error}`,
       status: 400,
       message: { err: 'An error occurred' },
     });
@@ -52,7 +52,7 @@ postController.createPost = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      log: `postController.getfilteredPosts: ERROR ${err}`,
+      log: `postController.getfilteredPosts: ERROR ${error}`,
       status: 400,
       message: { err: 'An error occurred' },
     });
@@ -79,7 +79,7 @@ postController.updatePost = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      log: `postController.updatePost: ERROR ${err}`,
+      log: `postController.updatePost: ERROR ${error}`,
       status: 400,
       message: { err: 'An error occurred' },
     });
@@ -96,7 +96,7 @@ postController.deletePost = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      log: `postController.updatePost: ERROR ${err}`,
+      log: `postController.updatePost: ERROR ${error}`,
       status: 400,
       message: { err: 'An error occurred' },
     });
