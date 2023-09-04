@@ -64,8 +64,9 @@ userController.updateUser = async (req, res, next) => {
 userController.deleteUser = async (req, res, next) => {
   const { userName } = req.query;
   try {
-    const deletedUser = findOneAndDelete({ userName });
+    const deletedUser = await User.findOneAndDelete({ userName });
     res.locals.deletedUser = deletedUser;
+    console.log('userController.deleteUser deleted:', deletedUser);
     return next();
   } catch (error) {
     return next({

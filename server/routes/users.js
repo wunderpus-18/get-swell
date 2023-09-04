@@ -19,8 +19,8 @@ router.patch('/', userController.updateUser, (req, res) => {
 });
 
 // // DELETE - delete user's account
-// router.delete('/', userController.deleteAccount, (req, res) => {
-//   res.status(200).json(res.locals.deleteAccount);
-// });
+router.delete('/', userController.deleteUser, (req, res) => {
+  res.status(200).json(res.locals.deletedUser);
+});
 
 module.exports = router;
