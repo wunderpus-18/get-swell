@@ -42,7 +42,7 @@ const activitySchema = new Schema(
     // preference instead of category
     preference: { type: String, required: true },
     // image is stretch
-    image: Buffer,
+    image: String,
     description: { type: String, required: true },
     hypes: { type: Number, default: 0 }, // Likes
     vibes: Array, // Comments
