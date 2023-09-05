@@ -16,7 +16,7 @@ const Feed = (props) => {
             .then( postObjArr => {
                 // filter first?
                 console.log(postObjArr);
-                const filteredPostObjArr = postObjArr.filter ( (el) => props.prefs[el.preference] );
+                const filteredPostObjArr = postObjArr.filter ( (el) => props.prefs[el.preference] ).reverse();
                 setFeedData(filteredPostObjArr);
                 setFeedChange(false);
             })        
