@@ -3,11 +3,6 @@ import './../stylesheets/Post.css';
 import octopus from '../assets/octopus-tentacles.png';
 
 const Comment = (props) => {
-  // STATE HOOKS
-  //HANDLERS
-
-  // props.postInfo.userName , category, description, hypes
-  // 
 
   return (
     <div className='post'>

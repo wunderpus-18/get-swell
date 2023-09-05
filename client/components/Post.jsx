@@ -8,16 +8,6 @@ const Post = (props) => {
   console.log('creating a post');
   console.log('postInfo:', postInfo);
   
-  // const [selectedPref, setSelectedPref] = useState('');
-
-  // const handlePrefChange = (event) => {
-  //   setSelectedPref(event.target.value);
-  // };
-  
-
-
-  //HANDLERS
-
   const deletePost = event => {
     const postID = event.target.parentNode.id;
     fetch(`/api/posts/${postID}`, {
@@ -32,10 +22,6 @@ const Post = (props) => {
       .catch(error => console.log(error));
   }
 
-  // props.postInfo.userName , category, description, hypes
-  // 
-  // const imgToDisplay = props.postInfo.image.data;
-
   return (
     <div className='post' id={props.postInfo._id}>
       <img src={props.postInfo.image || octopus}></img>
@@ -48,17 +34,3 @@ const Post = (props) => {
 };
 
 export default Post;
-
-
-// const activitySchema = new Schema( // this is a post
-//     {
-//       userName: { type: Schema.Types.ObjectId, ref: 'user', required: true },
-//       category: String, // preference
-//       image: Buffer, // stretch feature
-//       description: String,
-//       hypes: Number, // Likes
-//       vibes: Array, // Comments ---> need a separate database for this
-//     },
-//     { timestamps: true },
-//   );
-

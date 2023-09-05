@@ -48,10 +48,8 @@ const MainContainer = () => { // changed this to capital
   }, [isLoggedIn]);
 
 
-  // getUser('gayle'); // hard-coded
-
   return (
-    <>
+    <div>
       <div id='menuBar'>
         <DrawerAppBar
         prefs={prefs} setPrefs={setPrefs}
@@ -64,7 +62,7 @@ const MainContainer = () => { // changed this to capital
         
         <Feed prefs={prefs} setPrefs={setPrefs} feedChange={feedChange} setFeedChange={setFeedChange}/>
       </div>
-    </>
+    </div>
   );
 };
 

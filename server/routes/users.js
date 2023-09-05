@@ -8,17 +8,17 @@ router.get('/', userController.getUser, (req, res) => {
   res.status(200).json(res.locals.user);
 });
 
-// // POST - create new user in database
+// POST - create new user in database
 router.post('/', userController.createUser, (req, res) => {
   res.status(200).json(res.locals.newUser);
 });
 
-// // UPDATE - update preferences, user account, zip code, etc.
+// UPDATE - update preferences, user account, zip code, etc.
 router.patch('/', userController.updateUser, (req, res) => {
   res.status(200).json(res.locals.updatedUser);
 });
 
-// // DELETE - delete user's account
+// DELETE - delete user's account
 router.delete('/', userController.deleteUser, (req, res) => {
   res.status(200).json(res.locals.deletedUser);
 });
