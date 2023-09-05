@@ -40,7 +40,8 @@ const activitySchema = new Schema(
   {
     userID: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     preference: { type: String, required: true },
-    image: Buffer,
+    // image is stretch
+    image: String,
     description: { type: String, required: true },
     hypes: { type: Number, default: 0 }, // Likes
     vibes: Array, // Comments
