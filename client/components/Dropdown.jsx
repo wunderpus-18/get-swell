@@ -16,7 +16,6 @@ const DropdownMenu = (props) => {
     return (
       <div style={dropdownStyles}>
         <label>What's your vibe?</label>  
-        {/* <select onChange={(event) => setPostCategory(event.target.value)}> */}
         <select onChange={(event) => setPostCategory(event.target.value)} value={postCategory}>
             <option value="Motivation">Motivation</option>
             <option value="Milestones">Milestones</option>

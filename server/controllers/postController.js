@@ -39,7 +39,7 @@ postController.getFilteredPosts = async (_, res, next) => {
   }
 };
 
-// CREATE NEW POST - Done
+// CREATE NEW POST
 postController.createPost = async (req, res, next) => {
   console.log('entered postController.createPost');
   const { userID, preference, image, description, hypes, vibes } = req.body;
@@ -64,7 +64,7 @@ postController.createPost = async (req, res, next) => {
   }
 };
 
-// UPDATE POST - Done
+// UPDATE POST
 postController.updatePost = async (req, res, next) => {
   const { id } = req.params;
   //TODO: We might need a separate update controller for comments
@@ -87,7 +87,7 @@ postController.updatePost = async (req, res, next) => {
   }
 };
 
-// DELETE POST - Done
+// DELETE POST
 postController.deletePost = async (req, res, next) => {
   const { id } = req.params;
 

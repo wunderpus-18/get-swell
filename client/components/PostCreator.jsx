@@ -7,38 +7,19 @@ import DropdownMenu from './Dropdown.jsx';
 const PostCreator = (props) => {
 
 const { _id, userName } = props.user
+
 const [postText, setPostText] = useState('');
 const [postCategory, setPostCategory] = useState('Motivation');
-const [postImage, setPostImage] = useState('');
 const { feedChange, setFeedChange } = props;
 
-
-const handleFileUpload = (e) => {
-  const file = e.target.files[0];
-  const reader = new FileReader();
-
-  reader.onloadend = () => {
-    // console.log('reader.result:', reader.result)
-    setPostImage(reader.result);
-  };
-
-  if (file) {
-    reader.readAsDataURL(file);
-    
-  }
-  // console.log('post image', postImage);
-
-}
-
 const handlePost =  () => {
-  console.log('post image', postImage);
   fetch('/api/posts/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       userID: _id,
       preference: postCategory,
-      image: postImage,
+      // image: image,
       description: postText,
     })
   })
@@ -51,12 +32,12 @@ const handlePost =  () => {
       console.log('error: ', err);
     })
   }
+  
 const containerStyles = {
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
 }
-
 
 const inputStyles = {
   width: '100%',
@@ -80,8 +61,7 @@ const inputStyles = {
               type='file'
               label='image'
               id='fileUpload'
-              accept='.jpeg, .png, .txt'
-              onChange={handleFileUpload}/> 
+              accept='.jpeg, .png,'/> 
        </form>
        </div>
        <button onClick={() => handlePost()}>Post</button>
