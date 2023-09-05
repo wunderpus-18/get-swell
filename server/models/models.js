@@ -39,9 +39,7 @@ const User = mongoose.model('User', userSchema);
 const activitySchema = new Schema(
   {
     userID: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    // preference instead of category
     preference: { type: String, required: true },
-    // image is stretch
     image: Buffer,
     description: { type: String, required: true },
     hypes: { type: Number, default: 0 }, // Likes

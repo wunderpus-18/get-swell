@@ -17,13 +17,14 @@ const MainContainer = () => { // changed this to capital
     Mindfulness: false
   });
   const [user, setUser] = useState({});
+  const [feedChange, setFeedChange] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   function getUserAndUpdatePrefs (userName){
     fetch(getUserUrl+userName)
       .then(data => data.json())
       .then(userInfo => {
-        // console.log(userInfo);
+        console.log(userInfo);
         setUser(userInfo);
         const lowercaseKeys = Object.keys(userInfo.preferences);
         console.log('prev prefs', userInfo.preferences);
@@ -57,11 +58,11 @@ const MainContainer = () => { // changed this to capital
         user={user} setUser={setUser} />
       </div>
       <div id='postCreator'>
-        <PostCreator />
+        <PostCreator user={user} feedChange={feedChange} setFeedChange={setFeedChange}/>
       </div>
       <div id='feed'>
         
-        <Feed prefs={prefs} setPrefs={setPrefs} />
+        <Feed prefs={prefs} setPrefs={setPrefs} feedChange={feedChange} setFeedChange={setFeedChange}/>
       </div>
     </>
   );
