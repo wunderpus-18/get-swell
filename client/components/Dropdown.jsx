@@ -20,7 +20,7 @@ const DropdownMenu = (props) => {
         <label>What's your vibe?</label>  
 
         <select>
-
+            
             <option value="Motivation">Motivation</option>
 
             <option value="Milestones">Milestones</option>
@@ -28,9 +28,6 @@ const DropdownMenu = (props) => {
             <option value="Mindfulness">Mindfulness</option>
 
         </select>
-
-        
-
       </div>
     )
     

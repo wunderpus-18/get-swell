@@ -30,8 +30,10 @@ const MainContainer = () => { // changed this to capital
         const uppercaseKeys = lowercaseKeys.map( key => key[0].toUpperCase()+key.slice(1));
         const newPrefsObj = {};
         for (let i = 0; i < lowercaseKeys.length; i++){
-          newPrefsObj[uppercaseKeys[i]] = userInfo.preferences[lowercaseKeys[i]] === 'true';
-        }
+          // the code here accounts for handling how the prefs object is written
+          // lowercase motivation vs uppercase, string boolean vs boolean boolean
+          newPrefsObj[uppercaseKeys[i]] = userInfo.preferences[lowercaseKeys[i]] === 'true' || userInfo.preferences[lowercaseKeys[i]] === true;
+        };
         console.log('new prefs before updating state:', newPrefsObj);
         setPrefs(newPrefsObj); // 'motivation' 'Motivation'
       })
@@ -40,6 +42,7 @@ const MainContainer = () => { // changed this to capital
   console.log('the new prefs state is: ', prefs);
 
   useEffect(() => {
+    console.log('getting user and updating prefs');
     getUserAndUpdatePrefs('gayle'); // hard-coded for now
   }, [isLoggedIn]);
 

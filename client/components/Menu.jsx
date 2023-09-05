@@ -54,7 +54,24 @@ function DrawerAppBar(props) {
       Mindfulness: prefs.Mindfulness
     }
     newPrefs[preference] = isChecked;
-    setPrefs(newPrefs);
+
+    const url = 'http://localhost:3000/api/users';
+    fetch(url+'?userName='+props.user.userName, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        preferences: newPrefs
+      }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log('successfully patched preferences: ', json);
+        setPrefs(newPrefs);
+      })
+      .catch((err) =>
+        console.log(err));
   }
 
   // NOTE: when the user loads their page, it should load their saved preferences
