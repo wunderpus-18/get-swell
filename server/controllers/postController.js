@@ -41,6 +41,7 @@ postController.getFilteredPosts = async (_, res, next) => {
 
 // CREATE NEW POST - Done
 postController.createPost = async (req, res, next) => {
+  console.log('entered postController.createPost');
   const { userID, preference, image, description, hypes, vibes } = req.body;
   try {
     const postData = await Activity.create({

@@ -38,7 +38,7 @@ const Post = (props) => {
 
   return (
     <div className='post' id={props.postInfo._id}>
-      <img src={testImg}></img>
+      <img src={props.postInfo.image || octopus}></img>
       <p><b>Category: </b> {props.postInfo.preference}</p>
       <p><b>{props.postInfo.userID.userName}:</b> {props.postInfo.description}</p>
       <p><b>Hypes: </b>{props.postInfo.hypes}</p>
