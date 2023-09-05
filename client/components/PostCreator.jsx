@@ -6,13 +6,30 @@ import DropdownMenu from './Dropdown.jsx';
 
 const PostCreator = (props) => {
 
-const [createPost, setCreatePost] = useState('');
-
-const handlePost = async () => {
-  const results = await setCreatePost(createPost);
-  setCreatePost(results || '')
-}
-
+const { _id, userName } = props.user
+const [postText, setPostText] = useState('');
+const [postCategory, setPostCategory] = useState('Motivation');
+const { feedChange, setFeedChange } = props;
+const handlePost =  () => {
+  fetch('/api/posts/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userID: _id,
+      preference: postCategory,
+      // image: image,
+      description: postText,
+    })
+  })
+    .then ((response) => response.json())
+    .then ((data) => {
+      console.log('post successfully updated: ', data)
+      setFeedChange(true); // this will re-render the feed
+    })
+    .catch((err) => {
+      console.log('error: ', err);
+    })
+  }
 const containerStyles = {
   display: 'flex',
   flexDirection: 'column',
@@ -28,24 +45,29 @@ const inputStyles = {
   return (
       <div style={containerStyles} className='postCreator'>
         <div className="input-and-dropdown">
-       <DropdownMenu/>
+       <DropdownMenu postCategory={postCategory} setPostCategory={setPostCategory}/>
        <form>
-       <input 
-          type="text"
-          value={createPost}
-          onChange={(event) => setCreatePost(event.target.value)}
-          style={inputStyles}
-          className="post-input"
-       />
+          <input 
+              type="text"
+              value={postText}
+              onChange={(event) => setPostText(event.target.value)}
+              style={inputStyles}
+              className="post-input"
+          />
+          <input 
+              type='file'
+              label='image'
+              id='fileUpload'
+              accept='.jpeg, .png,'/> 
        </form>
        </div>
-       <button onClick={handlePost}>Post</button>
+       <button onClick={() => handlePost()}>Post</button>
      </div>
 
   
   );
 };
 
-export default PostCreator;
 
+export default PostCreator;
 

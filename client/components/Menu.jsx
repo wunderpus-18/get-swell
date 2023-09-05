@@ -78,6 +78,7 @@ function DrawerAppBar(props) {
   
 
   const drawer = (
+
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
         Get Swell
@@ -155,6 +156,7 @@ function DrawerAppBar(props) {
         </Typography>
       </Box>
     </Box>
+  
   );
 }
 

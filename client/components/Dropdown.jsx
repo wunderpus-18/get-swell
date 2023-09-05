@@ -6,6 +6,7 @@ const options = [
     'Motivation', 'Milestones', 'Mindfulness'
 ]
 const DropdownMenu = (props) => {
+  const { postCategory, setPostCategory } = props
     const dropdownStyles = {
        width: '300px', 
        display: 'flex',
@@ -16,18 +17,14 @@ const DropdownMenu = (props) => {
 
     return (
       <div style={dropdownStyles}>
-
         <label>What's your vibe?</label>  
-
-        <select>
-            
+        {/* <select onChange={(event) => setPostCategory(event.target.value)}> */}
+        <select onChange={(event) => setPostCategory(event.target.value)} value={postCategory}>
             <option value="Motivation">Motivation</option>
-
             <option value="Milestones">Milestones</option>
-
             <option value="Mindfulness">Mindfulness</option>
-
         </select>
+        
       </div>
     )
     
