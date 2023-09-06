@@ -44,7 +44,7 @@ const MainContainer = () => { // changed this to capital
 
   useEffect(() => {
     console.log('getting user and updating prefs');
-    getUserAndUpdatePrefs('gayle'); // hard-coded for now
+    getUserAndUpdatePrefs('Bryan'); // hard-coded for now
   }, [isLoggedIn]);
 
 
