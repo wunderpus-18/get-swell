@@ -57,7 +57,6 @@ const PostCreator = props => {
 
   return (
     <div style={containerStyles} className='postCreator'>
-      <img src={image} alt='' />
       <div className='input-and-dropdown'>
         <DropdownMenu
           postCategory={postCategory}
