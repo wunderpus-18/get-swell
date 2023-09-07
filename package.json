@@ -7,7 +7,7 @@
     "build": "webpack NODE_ENV=production",
     "start": "nodemon server/server.js",
     "dev": "concurrently \"NODE_ENV=development webpack-dev-server --open\" \"nodemon server/server.js\"",
-    "test": "jest"
+    "test": "jest --detectOpenHandles --forceExit"
   },
   "keywords": [],
   "author": "Bryan Choe, Gayle Martin, Ivy Shmikler, Meredith Frazier Britt, Moiz Rauf",

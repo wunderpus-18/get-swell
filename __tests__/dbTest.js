@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const postController = require('../server/controllers/postController.js');
 const userController = require('../server/controllers/userController.js');
 const userModel = require('../server/models/models.js');
+const Server = require('webpack-dev-server');
 
 let testUserId = '';
-
 
 describe('connected to database', () => {
   beforeAll(async () => {
@@ -28,11 +28,9 @@ describe('connected to database', () => {
   Post Controller Tests. Get, Create, Update, Delete
 */
 
-let testActivitiesId
+let testActivitiesId;
 
 describe('postController', () => {
-
-  
   describe('Get All Posts', () => {
     const mReq = { params: { id: '' } };
     const mRes = { locals: {} };
@@ -48,15 +46,17 @@ describe('postController', () => {
     });
   });
 
-  describe('Create Post', () => {
-    const mReq = {body: {
-      userID: { _id: '64f7cc6070af1c6e0e841fb4' },
-      preference: 'Motivation',
-      image: null,
-      description: 'DB Test',
-      hypes: 0,
-      vibes: [],
-    }};
+  describe('Create Post and Delete Post', () => {
+    const mReq = {
+      body: {
+        userID: { _id: '64f7cc6070af1c6e0e841fb4' },
+        preference: 'Motivation',
+        image: null,
+        description: 'DB Test',
+        hypes: 0,
+        vibes: [],
+      },
+    };
     const mRes = { locals: {} }; // expect
     const mNext = jest.fn();
     //  response should be the data point
@@ -70,31 +70,28 @@ describe('postController', () => {
     });
     it('next function is called', () => {
       expect(mNext).toBeCalled();
-    })
+    });
     it('should error out if passed invalid data', async () => {
       try {
-        const errorTest = await postController.createPost({}, mRes, mNext)
+        const errorTest = await postController.createPost({}, mRes, mNext);
         expect(true).toBe(false);
-      } catch(error) {
+      } catch (error) {
         expect(error).toBeTruthy();
       }
-    })
+    });
+    // delete
+    it('Deletes Post', async () => {
+      console.log('test act Id', testActivitiesId);
+      let mReq = { params: { id: testActivitiesId } };
+      const mRes = { locals: {} };
+      const mNext = jest.fn();
+      await postController.deletePost(mReq, mRes, mNext);
+      expect(mRes.locals.deletedPost.description).toBe('DB Test');
+    });
   });
 
   // console.log('before delete post', testActivitiesId);
-  // describe('Updates Post',) TODO:  
-  // delete
-  // describe('Delete Post', () => {
-  //   console.log('test act Id', testActivitiesId)
-  //   let mReq = {params: { id : testActivitiesId}};
-  //   const mRes = {locals: {}};
-  //   const mNext = jest.fn();
-  //   it('should delete post', async () => {
-  //     await postController.deletePost(mReq, mRes, mNext);
-  //     expect(mRes.locals.deletedPost.description).toBe('DB Test')
-  //   })
-  // })
-  // 
+  // describe('Updates Post',)
 });
 
 /* 
@@ -120,7 +117,7 @@ describe('UserController', () => {
       try {
         const userGamer = await userController.getUser(mReq, mRes, mNext);
         expect(true).toBe(false);
-      } catch(error) {
+      } catch (error) {
         expect(error).toBeTruthy();
       }
     });
@@ -132,7 +129,7 @@ describe('UserController', () => {
     it('Creates a new user', async () => {
       let mReq = {
         query: {
-          userName: 'choe'
+          userName: 'choe',
         },
         body: {
           password: 'bryan',
@@ -140,19 +137,19 @@ describe('UserController', () => {
           preferences: {
             Motivation: true,
             Milestones: false,
-            Mindfulness: false      
+            Mindfulness: false,
           },
-        zipCode: 92821
-      }
-    };
+          zipCode: 92821,
+        },
+      };
       const newUser = await userController.createUser(mReq, mRes, mNext);
-      console.log('NEW USER',newUser);
+      console.log('NEW USER', newUser);
       expect(mRes.locals.newUser.userName).toBe('choe');
-    })
+    });
     it('Next function is called', async () => {
       let mReq = {
         query: {
-          userName: 'choe'
+          userName: 'choe',
         },
         body: {
           password: 'bryan',
@@ -160,24 +157,24 @@ describe('UserController', () => {
           preferences: {
             Motivation: true,
             Milestones: false,
-            Mindfulness: false      
+            Mindfulness: false,
           },
-          zipCode: 92821
-        }
+          zipCode: 92821,
+        },
       };
       const newUser = await userController.createUser(mReq, mRes, mNext);
       expect(mNext).toBeCalled();
-    })
+    });
 
     it('Should throw an error when a user is not created properly', async () => {
       let mReq = {};
       try {
         const newUser = await userController.createUser(mReq, mRes, mNext);
         expect(true).toBe(false);
-      } catch(error) {
+      } catch (error) {
         expect(error).toBeTruthy();
       }
-    })
+    });
   });
 
   describe('Should delete a user', () => {
@@ -186,7 +183,7 @@ describe('UserController', () => {
     it('Should delete a user', async () => {
       let mReq = {
         query: {
-          userName: 'kobe'
+          userName: 'kobe',
         },
         body: {
           password: 'bryant',
@@ -194,35 +191,33 @@ describe('UserController', () => {
           preferences: {
             Motivation: true,
             Milestones: false,
-            Mindfulness: false      
+            Mindfulness: false,
           },
-          zipCode: 92821
-        }
+          zipCode: 92821,
+        },
       };
       const newUser = await userController.createUser(mReq, mRes, mNext);
       console.log('newUser: ', mRes.locals.newUser);
-      mReq = { query: {userName: mRes.locals.newUser.userName}}
+      mReq = { query: { userName: mRes.locals.newUser.userName } };
       const deletedUser = await userController.deleteUser(mReq, mRes, mNext);
       expect(mRes.locals.deletedUser.userName).toBe('kobe'); // status code indicates success and no content
-      mReq = {query: {userName: 'kobe'}};
+      mReq = { query: { userName: 'kobe' } };
       try {
-        const getUser = await userController.getUser(mReq, mRes, mNext)
+        const getUser = await userController.getUser(mReq, mRes, mNext);
         expect(true).toBe(false);
-      } catch(error) {
+      } catch (error) {
         expect(error).toBeTruthy();
       }
       // getUser should return an error when searching for 'Kobe'.
-    })
+    });
     it('Should return an error is user does not exist', async () => {
-      let mReq = {query: {userName: 'kobe'}};
+      let mReq = { query: { userName: 'kobe' } };
       try {
-        const getUser = await userController.deleteUser(mReq, mRes, mNext)
+        const getUser = await userController.deleteUser(mReq, mRes, mNext);
         expect(true).toBe(false);
-      } catch(error) {
+      } catch (error) {
         expect(error).toBeTruthy();
       }
-    })
-  })
-  
+    });
+  });
 });
-
